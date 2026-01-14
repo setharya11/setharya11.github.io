@@ -1,0 +1,117 @@
+/* ========== RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== BODY ========== */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(weather.webp);
+  padding: 1rem; /* mobile safety */
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+
+
+/* ========== DARK OVERLAY ========== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: -1;
+}
+
+/* ========== CARD ========== */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  padding: 28px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  color: #fff;
+}
+
+/* ========== TITLE ========== */
+.card h2 {
+  margin-bottom: 18px;
+  font-size: 1.6rem;
+}
+
+/* ========== INPUT ========== */
+input {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* ========== BUTTON ========== */
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1a73e8, #1558b0);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* ========== RESULT ========== */
+#result {
+  margin-top: 18px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ========== SMALL MOBILES (≤ 360px) ========== */
+@media (max-width: 360px) {
+  .card {
+    padding: 22px;
+  }
+
+  .card h2 {
+    font-size: 1.4rem;
+  }
+
+  input,
+  button {
+    padding: 11px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ========== TABLETS (≥ 768px) ========== */
+@media (min-width: 768px) {
+  .card {
+    max-width: 400px;
+  }
+
+  .card h2 {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/login.css"/>
+  </head>
+
+  <body>
+   <header>
+  <section>
+    <a href=""><img src="utilities/dialogo1.webp" alt="logo" /></a>
+  </section>
+  <section class="tittle">
+    <h2>Bhavya Diamond</h2>
+  </section>
+  <section>
+    <ul>
+      <li><a href="../BhavyaDiamond/index.html">Home</a></li>
+      <li><a href="../BhavyaDiamond/categories.html">Categories</a></li>
+      <li><a href="../BhavyaDiamond/cart.html">Cart </a></li>
+      <li><a href="../BhavyaDiamond/login.html" target="_blank">Log in</a></li>
+      <li><a href="../BhavyaDiamond/index.html#about">About us</a></li>
+    </ul>
+  </section>
+</header>
+
+
+    <div class="video-container">
+      <video autoplay loop muted playsinline class="background-video">
+        <source src="utilities/loginbg.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <h1>Login</h1>
+
+    <div class="form-wrapper">
+      <form action="/submit.php" method="post">
+
+        <!-- name -->
+        <div class="na">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+        </div>
+
+        <!-- phone -->
+        <div>
+          <label for="ph">Phone</label>
+          <input type="tel" id="ph" placeholder="Enter your phone number" required />
+        </div>
+
+        <!-- dob -->
+        <div>
+          <label for="date">DOB</label>
+          <input type="date" id="date" />
+        </div>
+
+        <!-- email -->
+        <div>
+          <label for="em">Email</label>
+          <input type="email" id="em" placeholder="Enter your Email" required />
+        </div>
+
+        <!-- gender -->
+        <div>
+          <label for="gen">Gender</label>
+          <select id="gen" required>
+            <option value="" disabled selected>Gender</option>
+            <option value="male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <!-- address -->
+        <div>
+          <label for="adde">Address</label>
+          <textarea name="address" id="adde"></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

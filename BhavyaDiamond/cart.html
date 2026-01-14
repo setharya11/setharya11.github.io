@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Your Cart - Bhavya Diamond</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="../BhavyaDiamond/css/style.css">
+  <script src="js/cart.js" defer></script>
+</head>
+<body class="home">
+  <header>
+  <section>
+    <a href=""><img src="../BhavyaDiamond/utilities/dialogo1.webp" alt="logo" /></a>
+  </section>
+  <section class="tittle">
+    <h2>Bhavya Diamond</h2>
+  </section>
+  <section>
+    <ul>
+      <li><a href="../BhavyaDiamond/index.html">Home</a></li>
+      <li><a href="../BhavyaDiamond/categories.html">Categories</a></li>
+      <li><a href="../BhavyaDiamond/cart.html">Cart </a></li>
+      <li><a href="../BhavyaDiamond/login.html" target="_blank">Log in</a></li>
+      <li><a href="../BhavyaDiamond/index.html#about">About us</a></li>
+    </ul>
+  </section>
+</header>
+
+
+  <section class="products" style="padding-top:110px;">
+    <h1>Your Cart</h1>
+    <div id="cartItems"></div>
+
+    <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+      <div>
+        <button class="add-cart-btn" onclick="window.location='categories.html'">Continue Shopping</button>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:1.1rem">Total: ₹ <span id="totalAmount">0</span></div>
+        <div style="margin-top:10px">
+          <button class="add-cart-btn" onclick="window.location='checkout.html'">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // render cart after js loaded
+    document.addEventListener("DOMContentLoaded", function(){ renderCart("cartItems","totalAmount"); });
+  </script>
+</body>
+</html>

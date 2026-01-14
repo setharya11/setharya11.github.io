@@ -1,0 +1,149 @@
+/* =======================
+   General Product Page CSS
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+/* Body */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #000;
+  color: #fff;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: rgba(0, 0, 0); /* semi-transparent black */
+  box-shadow: 0 2px 5px rgba(0, 0, 2, 1.1);
+  transition: opacity 0.3s ease-in-out;
+}
+header.hide {
+  opacity: 0;
+  pointer-events: none; /* disable clicks when hidden */
+}
+.tittle {
+  color: rgb(204, 204, 204);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif,
+    cursive;
+  font-size: 30px;
+  flex: 1;
+  margin: 0;
+  text-align: left;
+}
+
+header section img {
+  height: 50px;
+}
+
+header section ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+header section ul li a {
+  text-decoration: none;
+  color: rgb(204, 204, 204);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+header section ul li a:hover {
+  color: #0077cc;
+  size: 200px;
+}
+
+/* Product Section */
+.products {
+  padding-top: 110px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.products h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Product grid container */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding-bottom: 30px;
+}
+
+/* Individual product card */
+.product-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ffffff30;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* Product image */
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Product details */
+.product-card p {
+  margin: 6px 12px;
+  font-size: 0.95rem;
+}
+
+.product-card p b {
+  color: #fff;
+}
+
+/* Add to Cart button */
+.add-cart-btn {
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.add-cart-btn:hover {
+  background: #005fa3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .product-card img {
+    height: 180px;
+  }
+  .add-cart-btn {
+    padding: 8px;
+    margin: 10px;
+  }
+}

@@ -1,0 +1,68 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout-Bhavya Diamond</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="./css/cart.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html">
+      <img src="utilities/dialogo1.webp" alt="Bhavya Diamond Logo">
+    </a>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="categories.html">Categories</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html" target="_blank">Login</a>
+  </nav>
+</header>
+
+<main class="checkout-page">
+  <h1>Checkout</h1>
+
+  <div class="checkout-container">
+    
+    <!-- Checkout Form -->
+    <form class="checkout-form" id="checkoutForm">
+      <h2>Shipping Details</h2>
+
+      <label>Full Name *</label>
+      <input type="text" required />
+
+      <label>Phone *</label>
+      <input type="tel" required />
+
+      <label>Email</label>
+      <input type="email" />
+
+      <label>Address *</label>
+      <textarea required></textarea>
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div id="items"></div>
+
+      <div class="total">
+        Total: ₹ <span id="total">0</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/cc.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background-color: #90E0EF;
+    text-align:center;
+}
+.container{
+    height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:1.5vmin;
+}
+.game{
+    height:60vmin;
+    width:60vmin;
+    flex-wrap:wrap;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:1.5vmin;
+}
+.box{
+    height: 18vmin;
+    width:18vmin;
+    border-radius: 1rem;
+    border:none;
+    box-shadow: 0 0 5vmin #0077B6;
+    font-size: 8vmin;
+    color: #0077B6;
+    background-color: #ffff;
+}
+.reset-btn{
+    height:8vmin;
+    padding:1rem;
+    width:20vmin;
+    border-radius:1rem;
+    border:none;
+    box-shadow: 0 0 5vmin #0077B6;
+    font-size:3vmin;
+    color:#0077B6;
+}
+
+.nwbtn{
+    height:8vmin;
+    padding:1rem;
+    width:20vmin;
+    border-radius:1rem;
+    border:none;
+    box-shadow: 0 0 5vmin #0077B6;
+    font-size:3vmin;
+    color:#0077B6;
+    margin-top:2vmin;
+    margin-bottom: 05vmin;
+}
+
+.box:hover{
+    height: 19vmin;
+    width: 19vmin;
+}
+#msg{
+    font-size:7vmin;
+}
+.msg-container{
+margin-bottom: 1vmin;
+  height:10vmin
+
+}
+
+.hide{
+    display: none;
+}
+
+/* SMALL MOBILES */
+@media (max-width: 480px) {
+  .container {
+    min-height: 60vh;
+  }
+
+  .game {
+    gap: 3vmin;
+  }
+}
