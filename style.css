@@ -131,8 +131,8 @@ h1 {
 }
 
 .skillcards {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   background: rgba(255,255,255,0.1);
   border-radius: 20px;
   text-align: center;
