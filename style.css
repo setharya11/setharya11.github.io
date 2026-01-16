@@ -155,16 +155,22 @@ h1 {
 
 #resume a {
   display: inline-block;
-  margin-top: 2rem;
-  margin-left: 30rem;
-  margin-right: 30rem;
+  margin:2rem auto;
   padding: 1.2rem 1.5rem ;
   border-radius: 10px;
+  transition: 
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
   background: rgba(255,255,255,0.2);
 }
 
 #resume a:hover {
-  background: rgba(255,255,255,0.35);
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 1.5),
+    0 0 25px rgba(255, 255, 255, 2.15);
+  transform: translateY(-2px);
 }
 
 /* ========== RESPONSIVE ========== */
