@@ -27,7 +27,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* Background flare */}
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#5d5bff]/5 blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#4b5563]/5 blur-3xl -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Heading */}
@@ -36,11 +36,11 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight"
+            className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
           >
-            My <span className="text-[#5d5bff]">Skills</span>
+            My <span className="text-[#4b5563]">Skills</span>
           </motion.h2>
-          <div className="h-1 w-12 bg-gradient-to-r from-[#2413ff] to-[#5d5bff] mx-auto mt-4 rounded-full"></div>
+          <div className="h-1 w-12 bg-gradient-to-r from-[#000000] to-[#4b5563] mx-auto mt-4 rounded-full"></div>
         </div>
 
         {/* Skill Groups Selector Badges */}
@@ -49,8 +49,8 @@ export default function Skills() {
             onClick={() => setSelectedGroup(null)}
             className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
               selectedGroup === null
-                ? "bg-gradient-to-r from-[#2413ff] to-[#5d5bff] border-transparent text-white shadow-lg"
-                : "bg-white/5 border-white/10 text-gray-400 hover:text-white"
+                ? "bg-gradient-to-r from-[#000000] to-[#4b5563] border-transparent text-white shadow-lg"
+                : "bg-black/5 border-black/10 text-slate-600 hover:text-slate-900"
             }`}
           >
             All Categories
@@ -61,8 +61,8 @@ export default function Skills() {
               onClick={() => handleGroupClick(group.name)}
               className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border flex items-center gap-2 ${
                 selectedGroup === group.name
-                  ? "bg-gradient-to-r from-[#2413ff] to-[#5d5bff] border-transparent text-white shadow-lg"
-                  : "bg-white/5 border-white/10 text-gray-400 hover:text-white"
+                  ? "bg-gradient-to-r from-[#000000] to-[#4b5563] border-transparent text-white shadow-lg"
+                  : "bg-black/5 border-black/10 text-slate-600 hover:text-slate-900"
               }`}
             >
               {group.name}
@@ -86,14 +86,14 @@ export default function Skills() {
                 <motion.div
                   key={group.name}
                   variants={itemVariants}
-                  className="glass p-8 rounded-2xl border border-white/5 flex flex-col justify-start relative group hover:border-[#5d5bff]/30 transition-all duration-500"
+                  className="glass p-8 rounded-2xl border border-black/5 flex flex-col justify-start relative group hover:border-[#4b5563]/30 transition-all duration-500 shadow-sm"
                 >
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2.5 bg-[#5d5bff]/10 text-[#5d5bff] rounded-xl group-hover:bg-[#5d5bff]/25 transition-all">
+                    <div className="p-2.5 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
                       <IconComponent className="w-5 h-5" />
                     </div>
-                    <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-wider">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 uppercase tracking-wider">
                       {group.name}
                     </h3>
                   </div>
@@ -105,9 +105,9 @@ export default function Skills() {
                         key={skill.name}
                         initial={{ opacity: 0, y: 5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-200 text-sm font-semibold hover:text-white hover:bg-[#5d5bff]/20 hover:border-[#5d5bff]/40 transition-all duration-300 shadow-sm flex items-center gap-2 group/skill"
+                        className="px-3.5 py-2 rounded-xl bg-black/5 border border-black/5 text-slate-700 text-sm font-semibold hover:text-slate-900 hover:bg-[#4b5563]/15 hover:border-[#4b5563]/40 transition-all duration-300 shadow-sm flex items-center gap-2 group/skill"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5d5bff] group-hover/skill:scale-125 transition-transform" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#4b5563] group-hover/skill:scale-125 transition-transform" />
                         <span>{skill.name}</span>
                       </motion.div>
                     ))}

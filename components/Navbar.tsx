@@ -23,33 +23,27 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Scroll Spy to set active section accurately based on section midpoints
+      const scrollPosition = window.scrollY + 200; // offset for fixed header
+      const sections = navItems
+        .map((item) => document.querySelector(item.href) as HTMLElement | null)
+        .filter((sec): sec is HTMLElement => sec !== null);
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section.offsetTop <= scrollPosition) {
+          setActiveSection(section.id);
+          break;
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // IntersectionObserver to highlight active nav
-    const observerOptions = {
-      root: null,
-      rootMargin: "-40% 0px -50% 0px", // Trigger when section occupies the middle portion of the screen
-      threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
-
-    navItems.forEach((item) => {
-      const section = document.querySelector(item.href);
-      if (section) observer.observe(section);
-    });
+    handleScroll(); // Trigger once on mount
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
     };
   }, []);
 
@@ -70,7 +64,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#020024]/75 backdrop-blur-md border-b border-white/5 py-4"
+          ? "bg-white/80 backdrop-blur-md border-b border-black/5 py-4 shadow-sm"
           : "bg-transparent py-6"
       }`}
     >
@@ -79,14 +73,13 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={(e) => handleClick(e, "#home")}
-          className="text-white font-extrabold text-xl tracking-wider hover:opacity-85 transition-opacity"
+          className="text-slate-900 font-extrabold text-xl tracking-wider hover:opacity-85 transition-opacity"
         >
           {personalInfo.name.toUpperCase()}
-          <span className="text-[#5d5bff]">.</span>
+          <span className="text-[#4b5563]">.</span>
         </a>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-1 glass rounded-full px-2 py-1.5 border border-white/10">
+        <nav className="hidden md:flex items-center space-x-1 glass rounded-full px-2 py-1.5 border border-black/10 shadow-xs">
           {navItems.map((item) => {
             const isActive = activeSection === item.href.slice(1);
             return (
@@ -94,14 +87,14 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`relative px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors duration-300 ${
-                  isActive ? "text-white" : "text-gray-400 hover:text-white"
+                className={`relative px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors duration-300 ${
+                  isActive ? "text-slate-900" : "text-slate-500 hover:text-slate-900"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 bg-gradient-to-r from-[#2413ff] to-[#5d5bff] rounded-full -z-10"
+                    className="absolute inset-0 bg-slate-200 border border-slate-400/50 rounded-full -z-10 shadow-sm"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -117,7 +110,7 @@ export default function Navbar() {
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 bg-white/5 hover:bg-white/10 text-white text-xs font-bold py-2.5 px-4 rounded-full border border-white/10 transition-all duration-300"
+            className="flex items-center gap-1 bg-black/5 hover:bg-black/10 text-slate-900 text-xs font-bold py-2.5 px-4 rounded-full border border-black/10 transition-all duration-300"
           >
             GitHub <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
@@ -125,7 +118,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white focus:outline-none"
+          className="md:hidden text-slate-900 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -140,7 +133,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden absolute top-full left-0 w-full bg-[#020024]/95 backdrop-blur-xl border-b border-white/15 overflow-hidden"
+            className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-black/10 overflow-hidden shadow-lg"
           >
             <nav className="flex flex-col px-6 py-6 space-y-4">
               {navItems.map((item) => {
@@ -151,7 +144,7 @@ export default function Navbar() {
                     href={item.href}
                     onClick={(e) => handleClick(e, item.href)}
                     className={`text-sm font-semibold tracking-wider uppercase py-2 border-b border-white/5 transition-colors ${
-                      isActive ? "text-[#5d5bff]" : "text-gray-400 hover:text-white"
+                      isActive ? "text-[#4b5563]" : "text-gray-400 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -162,7 +155,7 @@ export default function Navbar() {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#2413ff] to-[#5d5bff] text-white text-sm font-bold py-3 rounded-xl shadow-lg"
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#000000] to-[#4b5563] text-white text-sm font-bold py-3 rounded-xl shadow-lg"
               >
                 GitHub <ArrowUpRight className="w-4 h-4" />
               </a>

@@ -36,7 +36,7 @@ export default function Certifications() {
   return (
     <section id="certifications" className="py-24 relative overflow-hidden">
       {/* Glow backgrounds */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#2413ff]/5 blur-3xl -z-10"></div>
+      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#000000]/5 blur-3xl -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Heading */}
@@ -45,11 +45,11 @@ export default function Certifications() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight"
+            className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
           >
-            My <span className="text-[#5d5bff]">Certifications</span>
+            My <span className="text-[#4b5563]">Certifications</span>
           </motion.h2>
-          <div className="h-1 w-12 bg-gradient-to-r from-[#2413ff] to-[#5d5bff] mx-auto mt-4 rounded-full"></div>
+          <div className="h-1 w-12 bg-gradient-to-r from-[#000000] to-[#4b5563] mx-auto mt-4 rounded-full"></div>
         </div>
 
         {/* Certifications Grid */}
@@ -64,41 +64,41 @@ export default function Certifications() {
             <motion.div
               key={cert.credentialId}
               variants={itemVariants}
-              className="glass p-8 rounded-2xl border border-white/5 flex flex-col justify-between hover:border-[#5d5bff]/30 transition-all duration-300 relative group"
+              className="glass p-8 rounded-2xl border border-black/5 flex flex-col justify-between hover:border-[#4b5563]/30 transition-all duration-300 relative group shadow-sm"
             >
               <div className="space-y-4">
                 {/* Ribbon icon badge */}
                 <div className="flex justify-between items-start">
-                  <div className="p-3 bg-[#5d5bff]/10 text-[#5d5bff] rounded-xl group-hover:bg-[#5d5bff]/25 transition-all">
+                  <div className="p-3 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
                     <Award className="w-6 h-6" />
                   </div>
-                  <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-lg">
-                    <Calendar className="w-3 h-3 text-[#5d5bff]" /> {cert.date}
+                  <span className="flex items-center gap-1 text-[10px] text-slate-500 font-bold uppercase tracking-widest bg-black/5 px-2.5 py-1 rounded-lg">
+                    <Calendar className="w-3 h-3 text-[#4b5563]" /> {cert.date}
                   </span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-white leading-tight">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
                     {cert.title}
                   </h3>
-                  <p className="text-[#5d5bff] text-xs sm:text-sm font-semibold">{cert.issuer}</p>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed font-medium">
+                  <p className="text-[#4b5563] text-xs sm:text-sm font-semibold">{cert.issuer}</p>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
                     {cert.description}
                   </p>
                 </div>
               </div>
 
               {/* Credential ID verifying bar */}
-              <div className="pt-6 mt-6 border-t border-white/5 flex flex-col sm:flex-row gap-4 justify-between items-center">
-                <div className="flex items-center gap-1.5 text-xs text-gray-500 font-semibold">
-                  <Hash className="w-3.5 h-3.5 text-[#5d5bff]" />
+              <div className="pt-6 mt-6 border-t border-black/5 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-semibold">
+                  <Hash className="w-3.5 h-3.5 text-[#4b5563]" />
                   <span>ID: {cert.credentialId}</span>
                 </div>
 
                 <button
                   onClick={() => handleVerify(cert.credentialId)}
                   disabled={verifyingId !== null || successId === cert.credentialId}
-                  className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-[#5d5bff]/50 hover:bg-[#5d5bff]/10 text-gray-300 hover:text-white transition-all duration-300 relative flex items-center justify-center gap-1.5 w-full sm:w-auto cursor-pointer"
+                  className="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 hover:border-[#4b5563]/50 hover:bg-[#4b5563]/10 text-gray-300 hover:text-white transition-all duration-300 relative flex items-center justify-center gap-1.5 w-full sm:w-auto cursor-pointer"
                 >
                   <AnimatePresence mode="wait">
                     {verifyingId === cert.credentialId ? (
@@ -110,7 +110,7 @@ export default function Certifications() {
                         className="flex items-center gap-1"
                       >
                         {/* Loading spinner */}
-                        <svg className="animate-spin h-3.5 w-3.5 text-[#5d5bff]" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin h-3.5 w-3.5 text-[#4b5563]" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>

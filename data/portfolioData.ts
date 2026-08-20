@@ -130,7 +130,7 @@ export const projects = [
       "Improved semantic search efficiency by 40% through indexing optimizations",
       "Leveraged OpenRouterAPI for lightweight LLM inference integrations"
     ],
-    techStack: ["Python", "FastAPI", "PostgreSQL", "NLP", "OpenRouterAPI"],
+    techStack: ["Python", "FastAPI", "PostgreSQL", "NLP", "OpenRouter API"],
     githubUrl: "https://github.com/setharya11",
     liveUrl: "https://setharya11.github.io/",
     image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80"
@@ -195,9 +195,9 @@ export const certifications = [
 
 export const githubStats = {
   username: "setharya11",
-  reposCount: 15,
-  followersCount: 34,
-  contributionsThisYear: 320,
+  reposCount: 8,
+  followersCount: 2,
+  contributionsThisYear: 80,
   contributionData: [
     [0, 1, 0, 2, 0, 1, 0, 2, 0, 3, 2, 1, 0, 0, 1, 0, 3, 0, 1, 2, 0, 3, 0, 0, 2, 1],
     [0, 1, 0, 2, 0, 0, 2, 1, 0, 0, 1, 2, 3, 0, 2, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 2],
@@ -211,13 +211,14 @@ export const githubStats = {
 
 export const leetcodeStats = {
   username: "setharya11",
-  solved: 472,
+  solved: 480,
   total: 3300,
+  streak: 429,
   contestRating: 1357,
-  contestRank: "Rank #230,589",
+  contestRank: "Rank #224,684",
   categories: {
-    easy: { solved: 141, total: 800, color: "#10b981" },
-    medium: { solved: 239, total: 1700, color: "#f59e0b" },
-    hard: { solved: 92, total: 800, color: "#ef4444" }
+    easy: { solved: 144, total: 800, color: "#10b981" },
+    medium: { solved: 242, total: 1700, color: "#f59e0b" },
+    hard: { solved: 94, total: 800, color: "#ef4444" }
   }
 };

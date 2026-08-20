@@ -12,38 +12,50 @@ export default function GitHubSection() {
     contributionsThisYear: githubStats.contributionsThisYear,
   });
 
+  const [contributionGrid, setContributionGrid] = React.useState<number[][]>(githubStats.contributionData);
+  const [totalLastYear, setTotalLastYear] = React.useState<number>(80);
+
   React.useEffect(() => {
     const fetchGitHubStats = async () => {
       try {
+        // Fetch user profile stats
         const response = await fetch(`https://api.github.com/users/${githubStats.username}`);
-        if (!response.ok) throw new Error("GitHub API failed");
-        const data = await response.json();
-
-        let contributions = githubStats.contributionsThisYear;
-        try {
-          const contribResponse = await fetch(`https://github-contributions-api.deno.dev/${githubStats.username}/count`);
-          if (contribResponse.ok) {
-            const contribData = await contribResponse.json();
-            const currentYear = new Date().getFullYear().toString();
-            if (contribData.total && contribData.total[currentYear]) {
-              contributions = contribData.total[currentYear];
-            } else if (contribData.total) {
-              const years = Object.keys(contribData.total);
-              if (years.length > 0) {
-                const latestYear = years.sort().pop()!;
-                contributions = contribData.total[latestYear];
-              }
-            }
-          }
-        } catch (e) {
-          console.warn("Failed to fetch contribution graph details:", e);
+        if (response.ok) {
+          const data = await response.json();
+          setStats((prev) => ({
+            ...prev,
+            reposCount: data.public_repos ?? prev.reposCount,
+            followersCount: data.followers ?? prev.followersCount,
+          }));
         }
 
-        setStats({
-          reposCount: data.public_repos ?? githubStats.reposCount,
-          followersCount: data.followers ?? githubStats.followersCount,
-          contributionsThisYear: contributions,
-        });
+        // Fetch live contribution grid details from jogruber v4 API
+        const contribResponse = await fetch(`https://github-contributions-api.jogruber.de/v4/${githubStats.username}?y=last`);
+        if (contribResponse.ok) {
+          const contribData = await contribResponse.json();
+          if (contribData.contributions && Array.isArray(contribData.contributions)) {
+            const contributionsList: Array<{ date: string; count: number; level: number }> = contribData.contributions;
+            
+            // Calculate total for last year
+            const totalCount = contributionsList.reduce((acc, curr) => acc + curr.count, 0);
+            setTotalLastYear(totalCount);
+            setStats((prev) => ({ ...prev, contributionsThisYear: totalCount }));
+
+            // Convert linear contribution list (up to last 364 days / 52 weeks) into 7 rows x 52 columns matrix
+            // Row 0 = Sunday, Row 6 = Saturday
+            const grid: number[][] = Array.from({ length: 7 }, () => []);
+            const recentDays = contributionsList.slice(-364); // last 52 weeks
+
+            recentDays.forEach((day) => {
+              const dayOfWeek = new Date(day.date).getDay(); // 0 to 6
+              grid[dayOfWeek].push(day.level);
+            });
+
+            if (grid[0].length > 0) {
+              setContributionGrid(grid);
+            }
+          }
+        }
       } catch (err) {
         console.error("Error loading live GitHub stats:", err);
       }
@@ -55,15 +67,15 @@ export default function GitHubSection() {
   const getColor = (level: number) => {
     switch (level) {
       case 1:
-        return "bg-[#5d5bff]/20 border border-[#5d5bff]/10";
+        return "bg-emerald-200 border border-emerald-300";
       case 2:
-        return "bg-[#5d5bff]/40 border border-[#5d5bff]/20";
+        return "bg-emerald-400 border border-emerald-500";
       case 3:
-        return "bg-[#2413ff]/60 border border-[#2413ff]/30 shadow-[0_0_4px_rgba(36,19,255,0.4)]";
+        return "bg-emerald-600 border border-emerald-700 shadow-xs";
       case 4:
-        return "bg-[#5d5bff] border border-[#5d5bff]/50 shadow-[0_0_8px_#5d5bff]";
+        return "bg-emerald-800 border border-emerald-900 shadow-sm";
       default:
-        return "bg-white/5 border border-white/5";
+        return "bg-slate-100 border border-slate-200";
     }
   };
 
@@ -84,38 +96,38 @@ export default function GitHubSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="glass p-8 sm:p-12 rounded-3xl border border-white/5 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+          className="glass p-8 sm:p-12 rounded-3xl border border-black/5 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm"
         >
           {/* Info stats (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-6">
             <div className="space-y-2">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#5d5bff]">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#4b5563]">
                 Contributions
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 GitHub Dashboard
               </h3>
-              <p className="text-gray-400 text-sm font-medium leading-relaxed">
+              <p className="text-slate-600 text-sm font-medium leading-relaxed">
                 Visualizing code integrations, repository expansions, and activity streams pushed to @{githubStats.username}.
               </p>
             </div>
 
             {/* Quick counter cards */}
             <div className="grid grid-cols-3 gap-4">
-              <div className="bg-white/2 p-4 rounded-2xl border border-white/5 flex flex-col justify-center items-center text-center">
-                <GitBranch className="w-4 h-4 text-[#5d5bff] mb-1.5" />
-                <span className="text-white text-lg font-black">{stats.reposCount}</span>
-                <span className="text-gray-500 text-[9px] font-bold uppercase tracking-wider mt-0.5">Repos</span>
+              <div className="bg-black/5 p-4 rounded-2xl border border-black/5 flex flex-col justify-center items-center text-center">
+                <GitBranch className="w-4 h-4 text-[#4b5563] mb-1.5" />
+                <span className="text-slate-900 text-lg font-black">{stats.reposCount}</span>
+                <span className="text-slate-500 text-[9px] font-bold uppercase tracking-wider mt-0.5">Repos</span>
               </div>
-              <div className="bg-white/2 p-4 rounded-2xl border border-white/5 flex flex-col justify-center items-center text-center">
-                <Users className="w-4 h-4 text-[#5d5bff] mb-1.5" />
-                <span className="text-white text-lg font-black">{stats.followersCount}</span>
-                <span className="text-gray-500 text-[9px] font-bold uppercase tracking-wider mt-0.5">Followers</span>
+              <div className="bg-black/5 p-4 rounded-2xl border border-black/5 flex flex-col justify-center items-center text-center">
+                <Users className="w-4 h-4 text-[#4b5563] mb-1.5" />
+                <span className="text-slate-900 text-lg font-black">{stats.followersCount}</span>
+                <span className="text-slate-500 text-[9px] font-bold uppercase tracking-wider mt-0.5">Followers</span>
               </div>
-              <div className="bg-white/2 p-4 rounded-2xl border border-white/5 flex flex-col justify-center items-center text-center">
-                <GitPullRequest className="w-4 h-4 text-[#5d5bff] mb-1.5" />
-                <span className="text-white text-lg font-black">{stats.contributionsThisYear}</span>
-                <span className="text-gray-500 text-[9px] font-bold uppercase tracking-wider mt-0.5">Pushes</span>
+              <div className="bg-black/5 p-4 rounded-2xl border border-black/5 flex flex-col justify-center items-center text-center">
+                <GitPullRequest className="w-4 h-4 text-[#4b5563] mb-1.5" />
+                <span className="text-slate-900 text-lg font-black">{stats.contributionsThisYear}</span>
+                <span className="text-slate-500 text-[9px] font-bold uppercase tracking-wider mt-0.5">Pushes</span>
               </div>
             </div>
 
@@ -124,7 +136,7 @@ export default function GitHubSection() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#5d5bff]/50 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 w-full justify-center"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-black/5 hover:bg-black/10 border border-black/10 hover:border-[#4b5563]/50 text-slate-900 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 w-full justify-center"
             >
               View GitHub Profile <ExternalLink className="w-4 h-4" />
             </a>
@@ -132,14 +144,19 @@ export default function GitHubSection() {
 
           {/* Contribution Graph Graph layout (lg:col-span-8) */}
           <div className="lg:col-span-8 flex flex-col justify-center items-start space-y-4">
-            <h4 className="text-gray-400 text-xs font-bold uppercase tracking-widest pl-1">
-              Simulated Contribution Grid (Current Year)
-            </h4>
+            <div className="flex justify-between items-center w-full pr-1">
+              <h4 className="text-slate-500 text-xs font-bold uppercase tracking-widest pl-1">
+                Live GitHub Contribution Grid
+              </h4>
+              <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                {totalLastYear} contributions in the last year
+              </span>
+            </div>
 
             {/* Grid Container */}
-            <div className="w-full bg-[#030026]/40 p-6 rounded-2xl border border-white/5 overflow-x-auto">
+            <div className="w-full bg-slate-50 p-6 rounded-2xl border border-black/5 overflow-x-auto">
               <div className="flex flex-col gap-1.5 min-w-[500px]">
-                {githubStats.contributionData.map((row, rIdx) => (
+                {contributionGrid.map((row, rIdx) => (
                   <div key={rIdx} className="flex gap-1.5">
                     {row.map((val, cIdx) => (
                       <div
@@ -152,14 +169,14 @@ export default function GitHubSection() {
               </div>
 
               {/* Legends */}
-              <div className="flex justify-between items-center mt-6 text-[10px] text-gray-500 font-semibold px-1">
+              <div className="flex justify-between items-center mt-6 text-[10px] text-slate-500 font-semibold px-1">
                 <span>Less active</span>
                 <div className="flex items-center gap-1">
-                  <div className="w-2.5 h-2.5 rounded bg-white/5 border border-white/5"></div>
-                  <div className="w-2.5 h-2.5 rounded bg-[#5d5bff]/20 border border-[#5d5bff]/10"></div>
-                  <div className="w-2.5 h-2.5 rounded bg-[#5d5bff]/40 border border-[#5d5bff]/20"></div>
-                  <div className="w-2.5 h-2.5 rounded bg-[#2413ff]/60 border border-[#2413ff]/30"></div>
-                  <div className="w-2.5 h-2.5 rounded bg-[#5d5bff] border border-[#5d5bff]/50"></div>
+                  <div className="w-2.5 h-2.5 rounded bg-slate-100 border border-slate-200"></div>
+                  <div className="w-2.5 h-2.5 rounded bg-emerald-200 border border-emerald-300"></div>
+                  <div className="w-2.5 h-2.5 rounded bg-emerald-400 border border-emerald-500"></div>
+                  <div className="w-2.5 h-2.5 rounded bg-emerald-600 border border-emerald-700"></div>
+                  <div className="w-2.5 h-2.5 rounded bg-emerald-800 border border-emerald-900"></div>
                   <span className="ml-1">More active</span>
                 </div>
               </div>

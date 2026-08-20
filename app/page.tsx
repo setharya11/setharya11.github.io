@@ -27,7 +27,7 @@ export default function Home() {
       </AnimatePresence>
 
       {!isLoading && (
-        <div className="relative min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#5d5bff]/30 selection:text-white">
+        <div className="relative min-h-screen text-slate-900 font-sans overflow-x-hidden selection:bg-slate-300 selection:text-slate-900">
           {/* Scrollable background stars */}
           <StarBackground />
 

@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       {/* Decorative gradient flare */}
-      <div className="absolute bottom-1/4 left-10 w-96 h-96 bg-[#2413ff]/5 blur-3xl -z-10 animate-pulse duration-10000"></div>
+      <div className="absolute bottom-1/4 left-10 w-96 h-96 bg-[#000000]/5 blur-3xl -z-10 animate-pulse duration-10000"></div>
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Heading */}
@@ -56,11 +56,11 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight"
+            className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
           >
-            Get In <span className="text-[#5d5bff]">Touch</span>
+            Get In <span className="text-[#4b5563]">Touch</span>
           </motion.h2>
-          <div className="h-1 w-12 bg-gradient-to-r from-[#2413ff] to-[#5d5bff] mx-auto mt-4 rounded-full"></div>
+          <div className="h-1 w-12 bg-gradient-to-r from-[#000000] to-[#4b5563] mx-auto mt-4 rounded-full"></div>
         </div>
 
         {/* Content Layout Grid */}
@@ -74,13 +74,13 @@ export default function Contact() {
           {/* Left Column: Contact Cards info (lg:col-span-5) */}
           <div className="lg:col-span-5 space-y-6">
             <motion.div variants={itemVariants} className="space-y-2 text-left">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#5d5bff]">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#4b5563]">
                 Let&apos;s Build Together
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 Connection Hub
               </h3>
-              <p className="text-gray-400 text-sm sm:text-base font-medium leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
                 Have a project idea, integration query, or open position? Drop a line via the form, or reach out directly on social hubs.
               </p>
             </motion.div>
@@ -89,16 +89,16 @@ export default function Contact() {
               {/* Email Card */}
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="glass p-5 rounded-2xl border border-white/5 flex items-center gap-4 hover:border-[#5d5bff]/30 transition-all duration-300 group"
+                className="glass p-5 rounded-2xl border border-black/5 flex items-center gap-4 hover:border-[#4b5563]/30 transition-all duration-300 group shadow-sm"
               >
-                <div className="p-3 bg-[#5d5bff]/10 text-[#5d5bff] rounded-xl group-hover:bg-[#5d5bff]/25 transition-all">
+                <div className="p-3 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+                  <h4 className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
                     Direct Email
                   </h4>
-                  <span className="text-white text-sm font-semibold mt-0.5 break-all">
+                  <span className="text-slate-900 text-sm font-semibold mt-0.5 break-all">
                     {personalInfo.email}
                   </span>
                 </div>
@@ -109,31 +109,31 @@ export default function Contact() {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-5 rounded-2xl border border-white/5 flex items-center gap-4 hover:border-[#5d5bff]/30 transition-all duration-300 group"
+                className="glass p-5 rounded-2xl border border-black/5 flex items-center gap-4 hover:border-[#4b5563]/30 transition-all duration-300 group shadow-sm"
               >
-                <div className="p-3 bg-[#5d5bff]/10 text-[#5d5bff] rounded-xl group-hover:bg-[#5d5bff]/25 transition-all">
+                <div className="p-3 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+                  <h4 className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
                     Professional Network
                   </h4>
-                  <span className="text-white text-sm font-semibold mt-0.5">
+                  <span className="text-slate-900 text-sm font-semibold mt-0.5">
                     linkedin.com/in/{personalInfo.name.toLowerCase().replace(/\s+/g, "")}
                   </span>
                 </div>
               </a>
 
               {/* Location Card */}
-              <div className="glass p-5 rounded-2xl border border-white/5 flex items-center gap-4 hover:border-[#5d5bff]/30 transition-all duration-300 group">
-                <div className="p-3 bg-[#5d5bff]/10 text-[#5d5bff] rounded-xl group-hover:bg-[#5d5bff]/25 transition-all">
+              <div className="glass p-5 rounded-2xl border border-black/5 flex items-center gap-4 hover:border-[#4b5563]/30 transition-all duration-300 group shadow-sm">
+                <div className="p-3 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+                  <h4 className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
                     Headquarters
                   </h4>
-                  <span className="text-white text-sm font-semibold mt-0.5">
+                  <span className="text-slate-900 text-sm font-semibold mt-0.5">
                     {personalInfo.location}
                   </span>
                 </div>
