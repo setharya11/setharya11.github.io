@@ -119,7 +119,7 @@ export default function Contact() {
                     Professional Network
                   </h4>
                   <span className="text-slate-900 text-sm font-semibold mt-0.5">
-                    linkedin.com/in/{personalInfo.name.toLowerCase().replace(/\s+/g, "")}
+                    linkedin.com/in/setharya11
                   </span>
                 </div>
               </a>
