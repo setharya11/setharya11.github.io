@@ -35,6 +35,14 @@ body {
   padding: 0;
 }
 
+/* Hide Next.js dev indicator badge */
+nextjs-portal,
+[data-nextjs-toast],
+[data-next-badge],
+div[data-nextjs-dialog-overlay] {
+  display: none !important;
+}
+
 /* Glassmorphism custom classes */
 .glass {
   background: var(--glass-bg);

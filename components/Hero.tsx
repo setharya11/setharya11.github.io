@@ -129,15 +129,6 @@ export default function Hero() {
               <span>Let&apos;s Chat</span>
               <span>Contact Me</span>
             </button>
-
-            {/* Download Resume */}
-            <a
-              href={personalInfo.resumeUrl}
-              download="Seth_Arya_Resume.pdf"
-              className="h-11 px-6 rounded-lg text-sm font-semibold border border-slate-300 hover:border-[#4b5563]/40 hover:bg-slate-100 text-slate-700 hover:text-slate-900 flex items-center justify-center transition-all duration-300 shadow-sm"
-            >
-              Download Resume
-            </a>
           </motion.div>
         </motion.div>
 

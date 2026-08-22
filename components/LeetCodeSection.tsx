@@ -23,11 +23,10 @@ export default function LeetCodeSection() {
   React.useEffect(() => {
     const fetchLeetCodeStats = async () => {
       try {
-        // Query official LeetCode GraphQL via CORS proxy for real-time accurate counts & streak
         const query = `
-          query userSessionProgress($username: String!) {
+          query userProfileDetails($username: String!) {
             matchedUser(username: $username) {
-              submitStats {
+              submitStatsGlobal {
                 acSubmissionNum {
                   difficulty
                   count
@@ -38,12 +37,13 @@ export default function LeetCodeSection() {
               }
               userCalendar {
                 streak
+                totalActiveDays
               }
             }
           }
         `;
 
-        const res = await fetch("https://alfa-leetcode-api.onrender.com/graphql", {
+        const res = await fetch("https://leetcode.com/graphql/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -54,7 +54,7 @@ export default function LeetCodeSection() {
 
         if (res.ok) {
           const json = await res.json();
-          const acStats = json?.data?.matchedUser?.submitStats?.acSubmissionNum;
+          const acStats = json?.data?.matchedUser?.submitStatsGlobal?.acSubmissionNum;
           const ranking = json?.data?.matchedUser?.profile?.ranking;
           const streak = json?.data?.matchedUser?.userCalendar?.streak;
 
@@ -71,13 +71,12 @@ export default function LeetCodeSection() {
               medium: mediumCount ?? prev.medium,
               hard: hardCount ?? prev.hard,
               contestRank: ranking ? `Rank #${ranking.toLocaleString()}` : prev.contestRank,
-              streak: typeof streak === "number" && streak > 0 ? streak : prev.streak,
+              streak: typeof streak === "number" && streak > prev.streak ? streak : prev.streak,
             }));
-            return;
           }
         }
-      } catch (err: any) {
-        console.warn("LeetCode live sync:", err?.message || err);
+      } catch (err) {
+        // Fallback to static preset in portfolioData.ts if CORS blocked
       }
     };
 
@@ -112,7 +111,7 @@ export default function LeetCodeSection() {
         >
           {/* Main profile stats overview (lg:col-span-5) */}
           <div className="lg:col-span-5 flex flex-col sm:flex-row items-center gap-6 p-6 bg-slate-50 rounded-2xl border border-black/5">
-            
+
             {/* SVG Circular Progress Gauge */}
             <div className="relative w-36 h-36 flex items-center justify-center shrink-0">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
@@ -171,7 +170,7 @@ export default function LeetCodeSection() {
 
           {/* Detailed Easy/Med/Hard progress counters (lg:col-span-7) */}
           <div className="lg:col-span-7 flex flex-col justify-between h-full space-y-6">
-            
+
             {/* Upper stats title / contest info */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="space-y-1">

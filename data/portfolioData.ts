@@ -211,14 +211,14 @@ export const githubStats = {
 
 export const leetcodeStats = {
   username: "setharya11",
-  solved: 480,
-  total: 3300,
-  streak: 429,
+  solved: 481,
+  total: 3450,
+  streak: 431,
   contestRating: 1357,
-  contestRank: "Rank #224,684",
+  contestRank: "Rank #223,219",
   categories: {
-    easy: { solved: 144, total: 800, color: "#10b981" },
-    medium: { solved: 242, total: 1700, color: "#f59e0b" },
-    hard: { solved: 94, total: 800, color: "#ef4444" }
+    easy: { solved: 144, total: 840, color: "#10b981" },
+    medium: { solved: 242, total: 1780, color: "#f59e0b" },
+    hard: { solved: 95, total: 830, color: "#ef4444" }
   }
 };

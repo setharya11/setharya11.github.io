@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { skillGroups } from "@/data/portfolioData";
 
 export default function Skills() {
@@ -71,51 +71,55 @@ export default function Skills() {
         </div>
 
         {/* Skills Display Panel */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {skillGroups
-            .filter((group) => selectedGroup === null || group.name === selectedGroup)
-            .map((group) => {
-              const IconComponent = group.icon;
-              return (
-                <motion.div
-                  key={group.name}
-                  variants={itemVariants}
-                  className="glass p-8 rounded-2xl border border-black/5 flex flex-col justify-start relative group hover:border-[#4b5563]/30 transition-all duration-500 shadow-sm"
-                >
-                  {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2.5 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
-                      <IconComponent className="w-5 h-5" />
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={selectedGroup || "all"}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {skillGroups
+              .filter((group) => selectedGroup === null || group.name === selectedGroup)
+              .map((group) => {
+                const IconComponent = group.icon;
+                return (
+                  <motion.div
+                    key={group.name}
+                    layout
+                    variants={itemVariants}
+                    className="glass p-8 rounded-2xl border border-black/5 flex flex-col justify-start relative group hover:border-[#4b5563]/30 transition-all duration-500 shadow-sm"
+                  >
+                    {/* Category Header */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2.5 bg-[#4b5563]/10 text-[#4b5563] rounded-xl group-hover:bg-[#4b5563]/25 transition-all">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 uppercase tracking-wider">
+                        {group.name}
+                      </h3>
                     </div>
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 uppercase tracking-wider">
-                      {group.name}
-                    </h3>
-                  </div>
 
-                  {/* Skills Badges Stack */}
-                  <div className="flex flex-wrap gap-2.5 flex-1 content-start">
-                    {group.skills.map((skill) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="px-3.5 py-2 rounded-xl bg-black/5 border border-black/5 text-slate-700 text-sm font-semibold hover:text-slate-900 hover:bg-[#4b5563]/15 hover:border-[#4b5563]/40 transition-all duration-300 shadow-sm flex items-center gap-2 group/skill"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#4b5563] group-hover/skill:scale-125 transition-transform" />
-                        <span>{skill.name}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
-        </motion.div>
+                    {/* Skills Badges Stack */}
+                    <div className="flex flex-wrap gap-2.5 flex-1 content-start">
+                      {group.skills.map((skill) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="px-3.5 py-2 rounded-xl bg-black/5 border border-black/5 text-slate-700 text-sm font-semibold hover:text-slate-900 hover:bg-[#4b5563]/15 hover:border-[#4b5563]/40 transition-all duration-300 shadow-sm flex items-center gap-2 group/skill"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#4b5563] group-hover/skill:scale-125 transition-transform" />
+                          <span>{skill.name}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                );
+              })}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
