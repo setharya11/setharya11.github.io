@@ -1844,48 +1844,48 @@ div[data-nextjs-dialog-overlay] {
 .btn-12 {
   position: relative;
   border: none;
-  box-shadow: none;
-  width: 150px;
-  height: 44px;
-  line-height: 44px;
-  perspective: 500px;
+  background: transparent;
+  width: 155px;
+  height: 46px;
+  perspective: 600px;
   cursor: pointer;
+  padding: 0;
 }
 
 .btn-12 span {
-  background: linear-gradient(135deg, #000000 0%, #4b5563 100%);
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
-  height: 44px;
-  border-radius: 10px;
+  width: 155px;
+  height: 46px;
+  border-radius: 12px;
   margin: 0;
   text-align: center;
   font-weight: 600;
+  font-size: 0.875rem;
   box-sizing: border-box;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transition: all .35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Back Face (Hovered view - White button) */
 .btn-12 span:nth-child(1) {
   background: #ffffff;
   color: #0f172a;
-  border: 1.5px solid #64748b;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1.5px solid #4b5563;
   transform: rotateX(90deg);
-  transform-origin: 50% 50% -22px;
+  transform-origin: 50% 50% -23px;
 }
 
+/* Front Face (Default view - Dark button) */
 .btn-12 span:nth-child(2) {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+  color: #ffffff;
+  border: 1.5px solid #1e293b;
   transform: rotateX(0deg);
-  transform-origin: 50% 50% -22px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transform-origin: 50% 50% -23px;
 }
 
 .btn-12:hover span:nth-child(1) {
