@@ -1848,7 +1848,7 @@ div[data-nextjs-dialog-overlay] {
   width: 150px;
   height: 44px;
   line-height: 44px;
-  perspective: 230px;
+  perspective: 500px;
   cursor: pointer;
 }
 
@@ -1859,20 +1859,25 @@ div[data-nextjs-dialog-overlay] {
   align-items: center;
   justify-content: center;
   position: absolute;
+  top: 0;
+  left: 0;
   width: 150px;
   height: 44px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin: 0;
   text-align: center;
   font-weight: 600;
   box-sizing: border-box;
-  transition: all .3s;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: all .35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-12 span:nth-child(1) {
   background: #ffffff;
   color: #0f172a;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1.5px solid #64748b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transform: rotateX(90deg);
   transform-origin: 50% 50% -22px;
 }
@@ -1880,6 +1885,7 @@ div[data-nextjs-dialog-overlay] {
 .btn-12 span:nth-child(2) {
   transform: rotateX(0deg);
   transform-origin: 50% 50% -22px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .btn-12:hover span:nth-child(1) {
@@ -1887,8 +1893,6 @@ div[data-nextjs-dialog-overlay] {
 }
 
 .btn-12:hover span:nth-child(2) {
-  background: #ffffff;
-  color: transparent;
   transform: rotateX(-90deg);
 }
 
